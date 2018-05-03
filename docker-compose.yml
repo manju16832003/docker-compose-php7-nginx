@@ -1,7 +1,12 @@
 web:
   image: nginx:latest
   ports:
-  - "8081:80"
+  - "8081:80" # expose container port 80 to host port 8081
   volumes:
-  - ./code:/code
-  - ./nginx/config.conf:/etc/nginx/conf.d/site.conf
+    - ./code:/code
+    - ./nginx/config.conf:/etc/nginx/conf.d/site.conf
+  links:
+    - php
+
+php:
+  image: php:7-fpm
